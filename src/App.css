@@ -1,20 +1,21 @@
+@media only screen and (min-device-width: 768px) {
+  .App {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
 .todo {
   margin-top: 10px;
-  width: 50%;
   padding: 10px;
   border: 5px solid #d5b98411;
-  display: grid;
-  align-items: center;
-  justify-content: center;
   color: rgba(0, 0, 0, 0.801);
 }
 
 .todo-input {
-  height: 40px;
-  width: 500px;
-  padding: 10px;
+  width: 85%;
   border: 3px solid #0000005d;
   border-radius: 10px 10px;
+  padding: 10px;
 }
 
 .todo-input:hover {
@@ -24,13 +25,14 @@
   outline: none;
 }
 
-.header,
-.list {
-  display: block;
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 40px;
 }
 
-.list {
-  margin-top: 20px;
+.task-list {
+  display: block;
 }
 
 ul {
@@ -48,15 +50,12 @@ ul li {
 }
 
 .add-button {
-  height: 66px;
-  padding: 10px;
-  width: 60px;
   margin-left: 10px;
   background: transparent;
   border: 3px solid #0000005d;
   border-radius: 10px;
   cursor: pointer;
-  visibility: hidden;
+  width: 15%;
 }
 
 .add-button:active {
@@ -92,9 +91,6 @@ ul li {
 .completed-tasks ul li {
   text-decoration: line-through;
   color: #808080b8;
-}
-.btn-is-visible {
-  visibility: visible;
 }
 
 .show-hide {

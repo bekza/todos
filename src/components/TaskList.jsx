@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TaskList({ tasks, handleDone }) {
   return (
-    <div className="list">
+    <div className="task-list">
       {tasks.length > 0 && (
         <ul>
           {
