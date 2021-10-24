@@ -28,6 +28,11 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+    // set `isHideCompleted` true if no more completed tasks
+    if (completedTasks.length < 1) {
+      setIsHideCompleted(true);
+    }
   }, [tasks, completedTasks]);
 
   const handleAdd = (event) => {
