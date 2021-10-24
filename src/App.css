@@ -4,6 +4,10 @@
     margin: 0 auto;
   }
 }
+h3,
+h4 {
+  color: #011c44ad;
+}
 .todo {
   margin-top: 10px;
   padding: 10px;
