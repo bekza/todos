@@ -66,10 +66,11 @@ ul li {
   border: 3px solid #0000007e;
 }
 
-.delete-button {
+.completed-task-icons {
   background: none;
   border: none;
   cursor: pointer;
+  color: green;
 }
 
 .done-checkbox {

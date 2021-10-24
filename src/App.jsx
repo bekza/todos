@@ -25,6 +25,11 @@ const App = () => {
     }
   });
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+  }, [tasks, completedTasks]);
+
   const handleAdd = (event) => {
     event.preventDefault();
     if (inputValue.length > 0) {
@@ -47,17 +52,22 @@ const App = () => {
   };
 
   const handleDone = (item) => {
-    const completedTask = tasks.filter((task) => task.id === item.id);
-    setCompletedTasks([...completedTasks, ...completedTask]);
+    const moveTaskToDone = tasks.filter((task) => task.id === item.id);
+    setCompletedTasks([...completedTasks, ...moveTaskToDone]);
 
     const updateTasks = tasks.filter((task) => task.id !== item.id);
     setTasks(updateTasks);
   };
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-  }, [tasks, completedTasks]);
+  const handleRecover = (item) => {
+    const itemToRecover = completedTasks.filter((task) => task.id === item.id);
+    setTasks([...tasks, ...itemToRecover]);
+
+    const updateCompletedTasks = completedTasks.filter(
+      (task) => task.id !== item.id
+    );
+    setCompletedTasks(updateCompletedTasks);
+  };
 
   return (
     <div className="App">
@@ -74,6 +84,7 @@ const App = () => {
           setIsHideCompleted={setIsHideCompleted}
           isHideCompleted={isHideCompleted}
           handleDelete={handleDelete}
+          handleRecover={handleRecover}
         />
       </div>
     </div>
