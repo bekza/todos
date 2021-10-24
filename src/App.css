@@ -104,3 +104,9 @@ ul li {
   color: #7a6a2e;
   cursor: pointer;
 }
+
+.validate {
+  color: coral;
+  font-size: 12px;
+  margin-left: 5px;
+}

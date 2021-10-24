@@ -8,6 +8,7 @@ import "./App.css";
 const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [isHideCompleted, setIsHideCompleted] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const [completedTasks, setCompletedTasks] = useState(() => {
     const savedCompletedTasks = localStorage.getItem("completedTasks");
     if (savedCompletedTasks) {
@@ -37,18 +38,23 @@ const App = () => {
 
   const handleAdd = (event) => {
     event.preventDefault();
-    if (inputValue.length > 0) {
-      setTasks([
-        ...tasks,
-        {
-          id: generateKey(inputValue),
-          name: inputValue,
-          isDone: false,
-        },
-      ]);
-      // reset input after add
-      setInputValue("");
+
+    if (inputValue.length < 1) {
+      setErrorMessage("Please add a task...");
+      return;
     }
+
+    setTasks([
+      ...tasks,
+      {
+        id: generateKey(inputValue),
+        name: inputValue,
+        isDone: false,
+      },
+    ]);
+    // reset input and errorMessage after add
+    setErrorMessage("");
+    setInputValue("");
   };
 
   const handleDelete = (item) => {
@@ -77,11 +83,11 @@ const App = () => {
   return (
     <div className="App">
       <div className="todo">
-        <h3>Tasks</h3>
         <TaskInput
           handleAdd={handleAdd}
           inputValue={inputValue}
           setInputValue={setInputValue}
+          errorMessage={errorMessage}
         />
         <TaskList tasks={tasks} handleDone={handleDone} />
         <CompletedTasks
