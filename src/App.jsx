@@ -45,12 +45,11 @@ const App = () => {
     }
 
     setTasks([
-      ...tasks,
       {
         id: generateKey(inputValue),
         name: inputValue,
-        isDone: false,
       },
+      ...tasks,
     ]);
     // reset input and errorMessage after add
     setErrorMessage("");
