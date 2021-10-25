@@ -26,9 +26,10 @@ export default function CompletedTasks({
                 return (
                   <li key={item.id}>
                     {item.name}
-                    <span>
+                    <span className="add-delete-return-icons">
                       <button
                         className="completed-task-icons"
+                        id="put-back-icon"
                         onClick={() => handleRecover(item)}
                       >
                         ⤴

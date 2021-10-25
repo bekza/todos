@@ -1,8 +1,12 @@
-@media only screen and (min-device-width: 768px) {
+/* @media only screen and (min-device-width: 768px) {
   .App {
-    width: 40%;
+    max-width: 768px;
     margin: 0 auto;
   }
+} */
+.App {
+  max-width: 700px;
+  margin: 0 auto;
 }
 h3,
 h4 {
@@ -20,6 +24,7 @@ h4 {
   border: 3px solid #0000005d;
   border-radius: 10px 10px;
   padding: 10px;
+  height: 30px;
 }
 
 .todo-input:hover {
@@ -33,15 +38,16 @@ h4 {
   display: flex;
   justify-content: space-evenly;
   height: 40px;
+  margin-bottom: 15px;
 }
 
 .task-list {
   display: block;
+  margin-top: 55px;
 }
 
 ul {
   border-top: 3px solid #d5b9848e;
-  padding-top: 10px;
   list-style: none;
 }
 
@@ -51,15 +57,19 @@ ul li {
   border-bottom: 2px solid #d5b98448;
   padding: 10px;
   margin-left: -40px;
+  word-break: break-word;
 }
 
 .add-button {
+  color: #011c44ad;
   margin-left: 10px;
   background: transparent;
   border: 3px solid #0000005d;
   border-radius: 10px;
   cursor: pointer;
   width: 15%;
+  height: 56px;
+  font-size: 25px;
 }
 
 .add-button:active {
@@ -105,4 +115,15 @@ ul li {
   color: coral;
   font-size: 12px;
   margin-left: 5px;
+}
+
+#put-back-icon {
+  transform: scale(1.5);
+  margin-right: 5px;
+}
+
+.add-delete-return-icons {
+  min-width: 56px;
+  padding-left: 3px;
+  text-align: right;
 }

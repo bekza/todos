@@ -34,7 +34,7 @@ const App = () => {
     setTasks([
       {
         id: generateKey(inputValue),
-        name: inputValue,
+        name: inputValue.slice(0, 255),
         isDone: false,
       },
       ...tasks,
