@@ -11,7 +11,39 @@ const App = () => {
     if (savedTasks) {
       return JSON.parse(savedTasks);
     } else {
-      return [];
+      return [
+        {
+          id: "Workout for 45 minutes_1635131939043",
+          name: "Workout for 45 minutes",
+          isDone: true,
+        },
+        {
+          id: "Play with kids_1635131914628",
+          name: "Play with kids",
+          isDone: false,
+        },
+        {
+          id: "Take a nap for 30 minutes_1635131866702",
+          name: "Take a nap for 30 minutes",
+          isDone: false,
+        },
+        {
+          id: "Stay away from phone for 2 hours_1635131850670",
+          name: "Stay away from phone for 2 hours",
+          isDone: false,
+        },
+        {
+          id: "Spend quality time with girlfriend_1635131829895",
+          name: "Spend quality time with girlfriend",
+          isDone: false,
+        },
+        {
+          id: "Read for 30 minutes The Millionaire Next Door_1635131812295",
+          name: "Read for 30 minutes The Millionaire Next Door",
+          isDone: false,
+        },
+        { id: "Call Mom_1635131768729", name: "Call Mom", isDone: false },
+      ];
     }
   };
   const [inputValue, setInputValue] = useState("");
@@ -77,6 +109,8 @@ const App = () => {
   const completedTaskList = useMemo(() => {
     return tasks.filter((item) => item.isDone === true);
   }, [tasks]);
+
+  console.log(JSON.stringify(tasks));
 
   return (
     <div className="App">
