@@ -110,8 +110,6 @@ const App = () => {
     return tasks.filter((item) => item.isDone === true);
   }, [tasks]);
 
-  console.log(JSON.stringify(tasks));
-
   return (
     <div className="App">
       <div className="todo">
