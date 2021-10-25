@@ -81,16 +81,12 @@ ul li {
   background: none;
   border: none;
   cursor: pointer;
-}
-.done-checkbox:hover {
-  outline: auto;
-}
-.done-checkbox:active {
-  transform: scale(0.9);
+  transform: scale(1.5);
 }
 .done-checkbox:active:after {
   content: "✔";
-  color: green;
+  padding-left: 1px;
+  color: #011c44ad;
 }
 
 .completed-tasks ul li {

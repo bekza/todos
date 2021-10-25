@@ -2,10 +2,10 @@ import React from "react";
 
 export default function CompletedTasks({
   completedTasks,
-  setIsHideCompleted,
-  isHideCompleted,
   handleDelete,
   handleRecover,
+  setIsShowCompleted,
+  isShowCompleted,
 }) {
   return (
     <div className="completed-tasks">
@@ -15,12 +15,12 @@ export default function CompletedTasks({
             Completed {completedTasks.length}{" "}
             <button
               className="show-hide"
-              onClick={() => setIsHideCompleted(!isHideCompleted)}
+              onClick={() => setIsShowCompleted(!isShowCompleted)}
             >
-              {isHideCompleted ? "Show" : "Hide"}
+              {isShowCompleted ? "Hide" : "Show"}
             </button>
           </h4>
-          {!isHideCompleted && (
+          {isShowCompleted && (
             <ul>
               {completedTasks.map((item) => {
                 return (

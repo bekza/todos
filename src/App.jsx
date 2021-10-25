@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { generateKey } from "./utils/utils";
 import TaskInput from "./components/TaskInput";
 import TaskList from "./components/TaskList";
@@ -6,41 +6,28 @@ import CompletedTasks from "./components/CompletedTasks";
 import "./App.css";
 
 const App = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [isHideCompleted, setIsHideCompleted] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [completedTasks, setCompletedTasks] = useState(() => {
-    const savedCompletedTasks = localStorage.getItem("completedTasks");
-    if (savedCompletedTasks) {
-      return JSON.parse(savedCompletedTasks);
-    } else {
-      return [];
-    }
-  });
-  const [tasks, setTasks] = useState(() => {
+  const getDataFromLocalStorage = () => {
     const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
       return JSON.parse(savedTasks);
     } else {
       return [];
     }
-  });
+  };
+  const [inputValue, setInputValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [tasks, setTasks] = useState(getDataFromLocalStorage);
+  const [isShowCompleted, setIsShowCompleted] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
-    // set `isHideCompleted` true if no more completed tasks
-    if (completedTasks.length < 1) {
-      setIsHideCompleted(true);
-    }
-  }, [tasks, completedTasks]);
+  }, [tasks]);
 
   const handleAdd = (event) => {
     event.preventDefault();
 
     if (inputValue.length < 1) {
-      setErrorMessage("Please add a task...");
+      setErrorMessage("Input must be filled out");
       return;
     }
 
@@ -48,6 +35,7 @@ const App = () => {
       {
         id: generateKey(inputValue),
         name: inputValue,
+        isDone: false,
       },
       ...tasks,
     ]);
@@ -56,28 +44,39 @@ const App = () => {
     setInputValue("");
   };
 
-  const handleDelete = (item) => {
-    const task = completedTasks.filter((task) => task.id !== item.id);
-    setCompletedTasks(task);
+  const handleDone = (item) => {
+    let updateTasks = [...tasks];
+    updateTasks.forEach((task) => {
+      if (item.id === task.id) {
+        task.isDone = true;
+      }
+    });
+    setTasks(updateTasks);
   };
 
-  const handleDone = (item) => {
-    const moveTaskToDone = tasks.filter((task) => task.id === item.id);
-    setCompletedTasks([...completedTasks, ...moveTaskToDone]);
-
+  const handleDelete = (item) => {
     const updateTasks = tasks.filter((task) => task.id !== item.id);
     setTasks(updateTasks);
   };
 
   const handleRecover = (item) => {
-    const itemToRecover = completedTasks.filter((task) => task.id === item.id);
-    setTasks([...tasks, ...itemToRecover]);
+    let updateTasks = [...tasks];
+    tasks.forEach((task) => {
+      if (task.id === item.id) {
+        task.isDone = false;
+      }
+    });
 
-    const updateCompletedTasks = completedTasks.filter(
-      (task) => task.id !== item.id
-    );
-    setCompletedTasks(updateCompletedTasks);
+    setTasks(updateTasks);
   };
+
+  const taskList = useMemo(() => {
+    return tasks.filter((item) => item.isDone === false);
+  }, [tasks]);
+
+  const completedTaskList = useMemo(() => {
+    return tasks.filter((item) => item.isDone === true);
+  }, [tasks]);
 
   return (
     <div className="App">
@@ -88,13 +87,13 @@ const App = () => {
           setInputValue={setInputValue}
           errorMessage={errorMessage}
         />
-        <TaskList tasks={tasks} handleDone={handleDone} />
+        <TaskList tasks={taskList} handleDone={handleDone} />
         <CompletedTasks
-          completedTasks={completedTasks}
-          setIsHideCompleted={setIsHideCompleted}
-          isHideCompleted={isHideCompleted}
+          completedTasks={completedTaskList}
           handleDelete={handleDelete}
           handleRecover={handleRecover}
+          isShowCompleted={isShowCompleted}
+          setIsShowCompleted={setIsShowCompleted}
         />
       </div>
     </div>
