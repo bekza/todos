@@ -44,6 +44,8 @@ h4 {
 .task-list {
   display: block;
   margin-top: 55px;
+  color: #011c44ad;
+  font-weight: 500;
 }
 
 ul {
