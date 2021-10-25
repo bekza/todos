@@ -18,7 +18,7 @@ export default function TaskInput({
           onChange={(e) => setInputValue(e.target.value)}
         />
         <button className="add-button" type="submit">
-          &#10133;
+          Add
         </button>
       </form>
       {errorMessage.length > 0 && (

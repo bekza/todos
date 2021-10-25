@@ -130,7 +130,8 @@ const App = () => {
       </div>
       {taskList.length > 5 && (
         <span className="author">
-          made with &#10084; by <a href="https://github.com/bekza">bekzat</a>
+          made with love &#9825; by{" "}
+          <a href="https://github.com/bekza">bekzat</a>
         </span>
       )}
     </div>
