@@ -96,6 +96,11 @@ const App = () => {
           setIsShowCompleted={setIsShowCompleted}
         />
       </div>
+      {taskList.length > 5 && (
+        <span className="author">
+          made with &#10084; by <a href="https://github.com/bekza">bekzat</a>
+        </span>
+      )}
     </div>
   );
 };
